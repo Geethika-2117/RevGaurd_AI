@@ -1,564 +1,269 @@
-# 🛡️ RevGaurd AI
+# 🛡️ RevGaurd AI — Revenue Leakage Detection & Recovery Agent
 
-### AI-Powered Revenue Leakage Detection & Recovery Agent
+## Overview
+
+**RevGaurd AI** is an AI-powered revenue leakage detection and recovery platform designed to help businesses identify revenue at risk, verify payment information, analyze the cause of leakage, and take safe recovery actions.
+
+The platform combines **Artificial Intelligence, payment verification, policy-based decision making, human approval, and auditability** into a single revenue recovery workflow.
 
 > **Find revenue that's slipping away. Understand why. Recover it safely.**
 
-RevGaurd AI is an intelligent revenue recovery platform that detects revenue leakage, verifies payment evidence against authoritative transaction records, analyzes the root cause using AI, determines the safest recovery strategy, and executes bounded recovery workflows with human approval and complete auditability.
-
-Instead of simply showing finance teams *where money was lost*, RevGaurd AI closes the loop:
-
-**Detect → Verify → Analyze → Decide → Act → Recover → Audit**
-
 ---
 
-## 🚨 The Problem
+## Problem Statement
 
-Revenue leakage is rarely caused by a single obvious failure.
-
-Businesses lose revenue through:
+Businesses lose significant revenue through issues such as:
 
 - Failed payments
 - Abandoned checkouts
 - Failed subscriptions
 - Overdue invoices
-- Payment verification issues
 - Duplicate transactions
-- Incorrect payment recipients
+- Payment status mismatches
 - Amount mismatches
-- Payment status inconsistencies
+- Wrong payment recipients
 
-Traditional dashboards can identify these events, but they often stop at:
+Traditional systems often identify these problems but do not determine **what action should be taken next**.
 
-> "Something went wrong."
+RevGaurd AI addresses this gap by moving from:
 
-The real question is:
-
-> **"What should we do about it, and can we safely recover the money?"**
-
-RevGaurd AI is designed to answer that question.
+**Detection → Decision → Recovery**
 
 ---
 
-# 💡 The Solution
+## Solution
 
-RevGaurd AI combines data verification, AI reasoning, deterministic financial calculations, policy enforcement, and bounded automation into one revenue recovery loop.
+RevGaurd AI analyzes revenue and payment data to:
 
-### Core Agent Loop
+- Detect potential revenue leakage
+- Verify uploaded payment documents
+- Compare payment evidence with authoritative transaction records
+- Identify probable root causes
+- Estimate recovery probability
+- Recommend recovery actions
+- Apply financial safety policies
+- Request human approval when required
+- Execute bounded recovery workflows
+- Track recovered revenue
+- Maintain a complete audit trail
 
-```text
-                    ┌──────────────────┐
-                    │   Revenue Data   │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │ Detect Leakage   │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │ Verify Evidence  │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │   AI Analysis    │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │ Recovery Decision│
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │ Safety / Policy  │
-                    │      Check       │
-                    └────────┬─────────┘
-                             │
-                    ┌────────┴────────┐
-                    │                 │
-                    ▼                 ▼
-             AUTO RECOVERY      HUMAN APPROVAL
-                    │                 │
-                    └────────┬────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │ Execute Recovery │
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │ Revenue Recovered│
-                    └────────┬─────────┘
-                             │
-                             ▼
-                    ┌──────────────────┐
-                    │   Audit Trail    │
-                    └──────────────────┘
+---
 
-🤖 Why RevGaurd AI is an Agent
+## Key Features
 
-RevGaurd AI is not just a prediction model or analytics dashboard.
+### Revenue Leakage Detection
 
-It follows a complete agentic workflow:
+Identifies different types of revenue leakage, including:
 
-Agent Stage	RevGaurd AI
-👁️ Observe	Monitors payment and revenue data
-🔎 Detect	Identifies potential revenue leakage
-✅ Verify	Cross-checks payment evidence against authoritative records
-🧠 Reason	Determines probable root cause
-🎯 Decide	Selects an appropriate recovery strategy
-⚡ Act	Executes a bounded recovery action
-📊 Verify Outcome	Confirms the recovery result
-🛑 Stop	Terminates the workflow when stopping rules are reached
-📋 Audit	Records important decisions and actions
-Core Design Principle
+- Failed Payments
+- Abandoned Checkouts
+- Failed Subscriptions
+- Overdue Invoices
+- Payment Verification Issues
 
-The AI provides intelligence. The policy engine provides control.
+### Payment Verification
 
-AI recommends and reasons.
+Uploaded payment documents are verified against authoritative transaction records using:
 
-Deterministic backend logic controls:
+- Transaction ID matching
+- Amount matching
+- Payment status matching
+- Recipient verification
+- Merchant verification
+- Timestamp validation
+- Duplicate transaction detection
 
-Financial calculations
-Authorization
-Recovery limits
-Policy thresholds
-Approval requirements
-Stopping rules
-🔐 Payment Verification
-A payment document alone cannot prove that a payment actually succeeded.
+Possible verification results include:
 
-RevGaurd AI therefore verifies uploaded payment evidence against an authoritative transaction record.
+- **Payment Verified**
+- **Needs Review**
+- **Verification Failed**
+- **Wrong Recipient**
+- **Amount Mismatch**
+- **Status Mismatch**
+- **Duplicate Transaction**
+- **Unverified**
 
-Verification Pipeline
-Payment Document
-       │
-       ▼
-Secure Upload
-       │
-       ▼
-File Integrity Check
-       │
-       ▼
-OCR / Text Extraction
-       │
-       ▼
-Structured Field Extraction
-       │
-       ▼
-Authoritative Payment Ledger
-       │
-       ▼
-┌───────────────────────────────┐
-│ Transaction Exists?           │
-│ Amount Matches?               │
-│ Status Matches?               │
-│ Recipient Matches?            │
-│ Merchant Matches?             │
-│ Timestamp Plausible?          │
-│ Duplicate Transaction?        │
-└───────────────┬───────────────┘
-                │
-                ▼
-       Verification Decision
-Verification Outcomes
-✅ PAYMENT VERIFIED
-⚠️ NEEDS REVIEW
-❌ VERIFICATION FAILED
-❌ WRONG RECIPIENT
-❌ AMOUNT MISMATCH
-❌ STATUS MISMATCH
-❌ DUPLICATE TRANSACTION
-⚠️ UNVERIFIED
-Important Principle
+> **The uploaded document is evidence. The authoritative transaction record is the source of truth.**
 
-The uploaded document is evidence. The authoritative transaction record is the source of truth.
+---
 
-The system distinguishes between document integrity and payment authenticity.
+## AI-Powered Analysis
 
-💰 Revenue Leakage Detection
+For eligible revenue leakage cases, RevGaurd AI analyzes:
 
-RevGaurd AI identifies multiple categories of revenue leakage.
+- Root Cause
+- Root Cause Confidence
+- Recovery Probability
+- Recommended Recovery Action
+- Expected Recovery
 
-1. Failed Payments
+### Expected Recovery
 
-A customer attempted a payment but the transaction failed.
+RevGaurd AI prioritizes recovery opportunities based on expected recoverable value.
 
-Recovery strategies:
+**Expected Recovery = Amount at Risk × Recovery Probability**
 
-Payment retry
-Payment method update
-Alternate payment method
-2. Abandoned Checkouts
+For example:
 
-A customer entered the purchasing flow but did not complete payment.
+**Amount at Risk:** ₹100,000  
+**Recovery Probability:** 75%  
+**Expected Recovery:** ₹75,000
 
-Recovery strategies:
+This helps prioritize opportunities based on both financial value and likelihood of recovery.
 
-Payment reminder
-Payment link
-Checkout recovery
-3. Failed Subscriptions
+---
 
-Recurring payments fail and create churn risk.
+## Bounded Recovery
 
-Recovery strategies:
+RevGaurd AI does not allow AI recommendations to directly control unrestricted financial actions.
 
-Retry payment
-Request payment method update
-Recovery reminder
-4. Overdue Invoices
+A deterministic policy engine evaluates recovery actions before execution.
 
-Invoices remain unpaid beyond their expected payment period.
+### Example Policy
 
-Recovery strategies:
+- Recovery amount **≤ ₹5,00,000** → Automatic recovery allowed
+- Recovery amount **> ₹5,00,000** → Human approval required
 
-Payment reminder
-Payment link
-Promise-to-pay workflow
-Finance escalation
-5. Payment Verification Issues
+High-value cases can be reviewed by authorized:
+
+- Finance Managers
+- Administrators
+
+Recovery workflows can also stop when:
+
+- Revenue has already been recovered
+- Maximum retry attempts are reached
+- Maximum contact attempts are reached
+- Customer opts out
+- Policy limits are exceeded
+- Verification confidence is insufficient
+- Required approval is not granted
+
+> **The AI provides intelligence. The policy engine provides control.**
+
+---
+
+## Agentic Workflow
+
+RevGaur AI follows an agentic approach:
+
+1. **Observe** — Analyze revenue and payment data
+2. **Detect** — Identify potential leakage
+3. **Verify** — Validate payment evidence
+4. **Reason** — Determine probable root cause
+5. **Decide** — Recommend a recovery strategy
+6. **Act** — Execute a bounded recovery action
+7. **Verify Outcome** — Confirm the recovery result
+8. **Stop** — Apply stopping rules
+9. **Audit** — Record important decisions and actions
+
+This makes RevGaur AI more than a dashboard or prediction model — it is a **closed-loop revenue recovery agent**.
+
+---
+
+## Multi-Tenant Architecture
+
+RevGaur AI is designed for multiple companies while maintaining organization-level data isolation.
+
+Each organization has its own:
+
+- Customers
+- Payments
+- Revenue leakage cases
+- Recovery actions
+- Payment documents
+- Audit records
+
+Organization context is derived from the authenticated user rather than being trusted from client-provided organization identifiers.
+
+---
+
+## Role-Based Access
+
+RevGaur AI supports role-based access control.
+
+| Role | Responsibility |
+|---|---|
+| **ADMIN** | Organization management and full platform control |
+| **ANALYST** | Investigate leakage and analyze recovery opportunities |
+| **FINANCE_MANAGER** | Review high-value cases and approve recovery |
+
+---
+
+## Audit Trail
+
+Important platform activities are recorded for traceability.
 
 Examples include:
 
-Incorrect payment status
-Wrong recipient
-Amount mismatch
-Duplicate transaction
-Missing transaction
-Unexpected merchant/account
+- User Login
+- Document Uploaded
+- Document Verified
+- Payment Verification Failed
+- Leakage Detected
+- AI Analysis Completed
+- Recovery Recommended
+- Policy Check Completed
+- Approval Requested
+- Recovery Approved
+- Recovery Executed
+- Revenue Recovered
+- Workflow Stopped
 
-These cases are verified before they can influence recovery decisions.
+This provides visibility into **what happened, why it happened, and what action was taken**.
 
-🧠 AI Analysis
+---
 
-RevGaurd AI analyzes eligible leakage cases using:
+## Technology Stack
 
-Root cause
-Root-cause confidence
-Recovery probability
-Recommended recovery action
-Expected recovery value
-Supporting evidence
-Expected Recovery
+### Frontend
 
-RevGaurd AI prioritizes opportunities based on expected recoverable value rather than simply sorting by the largest amount.
+- React
+- Vite
+- Tailwind CSS
+- JavaScript / JSX
 
-Expected Recovery
-=
-Amount at Risk × Recovery Probability
+### Backend
 
-Example:
+- Python
+- FastAPI
+- SQLAlchemy
+- JWT Authentication
 
-Amount at Risk        = ₹100,000
-Recovery Probability  = 75%
+### Database
 
-Expected Recovery     = ₹75,000
+- PostgreSQL
+- SQLite fallback for local development
 
-This allows finance teams to prioritize cases that are both valuable and realistically recoverable.
+### AI
 
-🛡️ Bounded Recovery
+- AI-powered root-cause analysis
+- Recovery recommendations
+- Recovery probability estimation
+- Deterministic fallback logic
 
-AI recommendations do not automatically grant unlimited financial authority.
+### Document Processing
 
-RevGaurd AI applies deterministic policy controls before executing recovery actions.
+- PDF Processing
+- Image Processing
+- OCR
+- Structured Field Extraction
 
-Example Recovery Policy
-Recovery Amount ≤ ₹5,00,000
-             │
-             ▼
-   Automatic Recovery Allowed
-Recovery Amount > ₹5,00,000
-             │
-             ▼
-     Human Approval Required
-             │
-             ▼
-     Finance Manager / Admin
-             │
-       ┌─────┴─────┐
-       ▼           ▼
-    Approve       Reject
-       │           │
-       ▼           ▼
-    Execute       Stop
-Workflow Stops When:
-Revenue has already been recovered
-Maximum retry attempts are reached
-Maximum contact attempts are reached
-Customer opts out
-Policy limits are exceeded
-Verification confidence is insufficient
-Human approval is required but not granted
-A safety or policy violation is detected
+### Security & Governance
 
-This creates a controlled human-in-the-loop recovery system rather than unrestricted AI automation.
+- Password Hashing
+- JWT Authentication
+- Role-Based Access Control
+- Multi-Tenant Isolation
+- Policy Enforcement
+- Audit Logging
 
-🏢 Multi-Tenant Architecture
+---
 
-RevGaurd AI is designed as a multi-tenant platform.
+## Project Structure
 
-Each company operates inside an isolated organization context.
-
-                    RevGaurd AI
-                         │
-          ┌──────────────┼──────────────┐
-          │              │              │
-          ▼              ▼              ▼
-       Company A      Company B      Company C
-          │              │              │
-       Customers      Customers      Customers
-       Payments       Payments       Payments
-       Leakage        Leakage        Leakage
-       Recovery       Recovery       Recovery
-       Audit          Audit          Audit
-
-Every organization-owned record is associated with an organization_id.
-
-The backend derives organization context from the authenticated user/session rather than trusting a client-provided organization ID.
-
-This provides isolation between companies.
-
-👥 Role-Based Access
-
-RevGaurd AI supports role-based access control.
-
-Role	Responsibility
-ADMIN	Organization management and full platform control
-ANALYST	Investigate leakage and analyze recovery opportunities
-FINANCE_MANAGER	Review high-value cases and approve recovery
-
-Sensitive or high-value recovery operations can therefore be routed to authorized human decision-makers.
-
-📊 Platform Capabilities
-Revenue Intelligence
-Money at Risk
-Revenue Recovered
-Recovery Rate
-Expected Recovery
-Leakage Categories
-Recovery Performance
-AI Intelligence
-Root-cause analysis
-Recovery probability
-Recommended action
-Expected recovery calculation
-AI activity history
-Payment Intelligence
-Payment document upload
-OCR/text extraction
-Transaction matching
-Amount verification
-Status verification
-Recipient verification
-Merchant verification
-Duplicate detection
-Recovery Operations
-Automatic recovery
-Human approval
-Finance escalation
-Recovery execution
-Simulated payment confirmation
-Recovery stopping rules
-Governance
-Policy engine
-Role-based authorization
-Audit trail
-Organization isolation
-Recovery action history
-🏗️ System Architecture
-┌──────────────────────────────────────────────┐
-│                 React Frontend               │
-│                                              │
-│ Dashboard │ Leakage │ Verification │ AI     │
-│ Recovery  │ Approvals │ Audit │ Settings     │
-└───────────────────────┬──────────────────────┘
-                        │
-                     REST API
-                        │
-                        ▼
-┌──────────────────────────────────────────────┐
-│                 FastAPI Backend              │
-├──────────────────────────────────────────────┤
-│ Authentication & Authorization               │
-│ Organization / Tenant Isolation              │
-│ Document Processing                          │
-│ Payment Verification                         │
-│ Revenue Leakage Detection                    │
-│ AI Analysis                                  │
-│ Policy Engine                                │
-│ Recovery Engine                              │
-│ Audit Logging                                │
-└───────────────┬──────────────────┬───────────┘
-                │                  │
-                ▼                  ▼
-       ┌────────────────┐  ┌──────────────────┐
-       │   PostgreSQL   │  │   AI / LLM Layer │
-       │                │  │                  │
-       │ Organizations  │  │ Root Cause       │
-       │ Customers      │  │ Recovery Advice  │
-       │ Payments       │  │ Recommendations  │
-       │ Leakage Cases  │  └──────────────────┘
-       │ Recovery       │
-       │ Audit Logs     │
-       └────────────────┘
-🧰 Technology Stack
-Frontend
-React
-Vite
-Tailwind CSS
-JavaScript / JSX
-Backend
-Python
-FastAPI
-SQLAlchemy
-JWT Authentication
-Database
-PostgreSQL
-SQLite fallback for local development
-AI
-AI-powered root-cause analysis
-Recovery recommendations
-Deterministic fallback logic
-Document Processing
-PDF processing
-Image processing
-OCR
-Structured field extraction
-Security & Governance
-Password hashing
-JWT authentication
-Role-based access control
-Multi-tenant isolation
-Policy enforcement
-Audit logging
-🔄 End-to-End Example
-
-Consider a payment document containing:
-
-Transaction ID: ACME-TXN-20260904-002
-Amount:         ₹52,000
-Status:         SUCCESS
-Recipient:      Acme Corporation
-
-RevGaurd AI does not blindly trust the document.
-
-It checks the authoritative payment ledger.
-
-Document
-   │
-   ├── Transaction exists?       ✓
-   ├── Amount matches?           ✓
-   ├── Status matches?           ✓
-   ├── Recipient matches?        ✓
-   ├── Merchant matches?         ✓
-   └── Duplicate?                ✗
-          │
-          ▼
-     PAYMENT VERIFIED
-
-For failed or inconsistent transactions, the platform can instead create a leakage case:
-
-Payment Failure
-      ↓
-Leakage Detected
-      ↓
-AI Root-Cause Analysis
-      ↓
-Recovery Probability
-      ↓
-Recommended Action
-      ↓
-Policy Check
-      ↓
-Automatic Recovery
-      OR
-Human Approval
-      ↓
-Recovery Outcome
-      ↓
-Audit Trail
-📋 Auditability
-
-Every critical operation can be recorded.
-
-Examples:
-
-USER_LOGIN
-DOCUMENT_UPLOADED
-DOCUMENT_VERIFIED
-PAYMENT_VERIFICATION_FAILED
-LEAKAGE_DETECTED
-AI_ANALYSIS_COMPLETED
-RECOVERY_RECOMMENDED
-POLICY_CHECK_COMPLETED
-APPROVAL_REQUESTED
-RECOVERY_APPROVED
-RECOVERY_EXECUTED
-REVENUE_RECOVERED
-WORKFLOW_STOPPED
-
-This creates a traceable record of the recovery lifecycle.
-
-🧪 Safe Demo Environment
-
-RevGaurd AI uses synthetic/demo payment and revenue data for demonstration.
-
-No real payment transactions are executed.
-
-Recovery actions are simulated and recorded within the application.
-
-This allows the complete agent workflow to be demonstrated safely:
-
-Detect → Decide → Recover → Measure
-
-without connecting the demo system to real financial infrastructure.
-
-🚀 Getting Started
-Prerequisites
-Python 3.10+
-Node.js 18+
-npm
-Git
-1. Clone the Repository
-git clone https://github.com/Geethika-2117/RevGaurd_AI.git
-cd RevGaurd_AI
-2. Install Frontend Dependencies
-npm install
-3. Start the Backend
-
-From the project root:
-
-python -m uvicorn backend.main:app --reload
-
-Backend:
-
-http://127.0.0.1:8000
-4. Start the Frontend
-
-Open another terminal in the project root:
-
-npm run dev
-
-Then open the URL provided by Vite, typically:
-
-http://localhost:5173
-🔑 Demo Credentials
-
-For the seeded demonstration environment:
-
-Email:     carol@acme.com
-Password:  acme123
-Role:      FINANCE_MANAGER
-Company:   Acme Corporation
-
-These credentials are intended only for the synthetic local/demo environment.
-
-📁 Project Structure
+```text
 RevGaurd_AI/
 │
 ├── backend/
@@ -597,136 +302,3 @@ RevGaurd_AI/
 ├── vite.config.js
 ├── .gitignore
 └── README.md
-🎯 Why RevGaurd AI?
-
-Most revenue systems focus on:
-
-"How much revenue was lost?"
-
-RevGaurd AI focuses on the next question:
-
-"How much of that revenue can we safely recover, and what should happen next?"
-
-It connects:
-
-Revenue Intelligence + AI Reasoning + Payment Verification + Policy + Automation + Human Oversight
-
-into one closed-loop revenue recovery system.
-
-🏆 Key Differentiators
-1. Detection → Action
-
-RevGaurd AI goes beyond analytics by connecting leakage detection directly to recovery workflows.
-
-2. Verification Before Action
-
-Payment evidence is cross-checked against authoritative transaction data before influencing recovery decisions.
-
-3. AI + Deterministic Controls
-
-AI handles reasoning and recommendations.
-
-Deterministic backend logic handles:
-
-Financial calculations
-Authorization
-Policy thresholds
-Recovery limits
-Stopping rules
-4. Human-in-the-Loop
-
-High-value or sensitive cases can require explicit finance approval.
-
-5. Measurable Recovery
-
-The system tracks:
-
-Money at Risk
-      ↓
-Expected Recovery
-      ↓
-Recovery Action
-      ↓
-Revenue Recovered
-6. Complete Auditability
-
-Critical decisions and actions are recorded for traceability.
-
-7. Multi-Tenant by Design
-
-Organizations operate in isolated data contexts.
-
-🎥 5-Minute Pitch
-
-The pitch demonstrates the complete revenue recovery lifecycle:
-
-Revenue leakage detection
-Payment document verification
-AI root-cause analysis
-Recovery recommendation
-Policy evaluation
-Human approval for high-value recovery
-Simulated recovery
-Revenue recovered
-Audit trail
-
-Demo video: Coming soon.
-
-🗺️ Roadmap
-Current
- Multi-tenant architecture
- Authentication
- Role-based access
- Revenue leakage detection
- Payment document processing
- Payment verification
- Duplicate detection
- AI analysis workflow
- Recovery recommendations
- Policy engine
- Human approval
- Recovery simulation
- Audit trail
-Future
- Production payment gateway integrations
- Real-time payment event ingestion
- Subscription recovery integrations
- Invoice system integrations
- Advanced LLM providers
- Adaptive recovery strategies
- Customer communication channels
- Production-grade PostgreSQL deployment
- Advanced revenue forecasting
-🔒 Security Disclaimer
-
-RevGaurd AI is a demonstration system and should not be connected to real financial infrastructure without additional production security controls.
-
-A production deployment should include:
-
-HTTPS/TLS
-Secure secret management
-Production PostgreSQL
-Key rotation
-Rate limiting
-Strong session management
-Comprehensive input validation
-Encryption at rest
-Encryption in transit
-Production monitoring
-Security testing
-Payment-provider compliance controls
-
-No real payment execution is performed by the demo recovery engine.
-
-👩‍💻 Author
-
-Geethika Vangala
-
-B.Tech — Computer Science & Engineering (AI)
-
-GitHub:
-https://github.com/Geethika-2117
-
-⭐ RevGaurd AI
-
-Find revenue that's slipping away. Understand why. Recover it safely.
