@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Obsidian Executive - The Recovery Loop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&amp;family=DM+Sans:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#D4AF37",
+                        background: {
+                            light: "#f8f8f6",
+                            dark: "#0A0B0E"
+                        },
+                        surface: "#16181D",
+                        text: "#EAECEF",
+                        muted: "#6B7280",
+                        accent: "#059669"
+                    },
+                    fontFamily: {
+                        heading: ['Cormorant Garamond', 'serif'],
+                        body: ['DM Sans', 'sans-serif'],
+                        display: ['DM Sans', 'sans-serif']
+                    },
+                    borderRadius: {
+                        DEFAULT: "0px",
+                        lg: "0px",
+                        xl: "0px",
+                        full: "0px"
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #0A0B0E;
+            color: #EAECEF;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .snap-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+        
+        .snap-section {
+            scroll-snap-align: start;
+            height: 100vh;
+        }
+
+        .nav-node.active .nav-text {
+            color: #D4AF37;
+        }
+        .nav-node.active .nav-dot {
+            background-color: #D4AF37;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+        
+        /* Smooth transitions for nodes */
+        .nav-text, .nav-dot {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-text antialiased">
+<!-- Shared TopNav (Included because this is a Destination screen) -->
+<div class="fixed top-0 left-0 w-full z-50">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-muted/30 px-10 py-4 bg-background-dark/90 backdrop-blur-md">
+<div class="flex items-center gap-4 text-white">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-white text-xl font-heading font-bold leading-tight tracking-wide uppercase">Obsidian</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="flex items-center gap-9 hidden md:flex">
+<a class="text-muted hover:text-primary transition-colors text-xs font-medium uppercase tracking-[2px]" href="#">Executive Dashboard</a>
+<a class="text-primary text-xs font-medium uppercase tracking-[2px]" href="#">The Recovery Loop</a>
+<a class="text-muted hover:text-primary transition-colors text-xs font-medium uppercase tracking-[2px]" href="#">Recovery Gallery</a>
+<a class="text-muted hover:text-primary transition-colors text-xs font-medium uppercase tracking-[2px]" href="#">The Bar</a>
+</div>
+<button class="flex min-w-[84px] cursor-pointer items-center justify-center border border-primary h-10 px-6 bg-transparent text-primary hover:bg-primary hover:text-background-dark transition-all duration-300 text-xs font-medium uppercase tracking-[2px]">
+<span>INITIALIZE AUDIT</span>
+</button>
+</div>
+</header>
+</div>
+<!-- Main Content: Split Screen Layout -->
+<main class="flex flex-col md:flex-row h-screen w-full pt-[73px]">
+<!-- Left Side: Sticky Navigation Index -->
+<aside class="w-full md:w-1/2 lg:w-[40%] h-auto md:h-[calc(100vh-73px)] border-r border-muted/20 relative flex flex-col justify-center p-12 bg-background-dark z-10">
+<div class="max-w-md mx-auto w-full relative">
+<!-- Vertical Line -->
+<div class="absolute left-[11px] top-6 bottom-6 w-[1px] bg-muted/30"></div>
+<!-- Active Line Progress (controlled by JS) -->
+<div class="absolute left-[11px] top-6 w-[1px] bg-primary transition-all duration-500 ease-out z-0" id="progress-line" style="height: 0%;"></div>
+<div class="flex flex-col gap-24 relative z-10">
+<!-- Node 01 -->
+<div class="nav-node active flex items-start gap-8 group cursor-pointer" data-target="section-1">
+<div class="relative pt-1">
+<div class="nav-dot w-6 h-6 rounded-full bg-surface border border-primary flex items-center justify-center z-10 relative">
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<span class="nav-text text-primary text-sm font-medium tracking-[2px] uppercase">01 / Detect</span>
+<h2 class="text-3xl lg:text-4xl font-heading text-text opacity-100 transition-opacity duration-300">Invisible Leaks</h2>
+<p class="text-muted text-sm leading-relaxed max-w-xs opacity-0 h-0 overflow-hidden transition-all duration-300 group-[.active]:opacity-100 group-[.active]:h-auto group-[.active]:mt-4">
+                                Our proprietary AI scans millions of transaction nodes in real-time, identifying anomalous routing failures and abandoned checkouts before they register as definitive losses.
+                            </p>
+</div>
+</div>
+<!-- Node 02 -->
+<div class="nav-node flex items-start gap-8 group cursor-pointer" data-target="section-2">
+<div class="relative pt-1">
+<div class="nav-dot w-6 h-6 rounded-full bg-surface border border-muted flex items-center justify-center z-10 relative">
+<div class="w-2 h-2 rounded-full bg-transparent"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<span class="nav-text text-muted text-sm font-medium tracking-[2px] uppercase">02 / Intervene</span>
+<h2 class="text-3xl lg:text-4xl font-heading text-text/50 group-[.active]:text-text transition-colors duration-300">Surgical Injection</h2>
+<p class="text-muted text-sm leading-relaxed max-w-xs opacity-0 h-0 overflow-hidden transition-all duration-300 group-[.active]:opacity-100 group-[.active]:h-auto group-[.active]:mt-4">
+                                Instantly injecting optimal routing paths and targeted recovery protocols, we thread a golden line through complex payment gateways to salvage compromised transactions.
+                            </p>
+</div>
+</div>
+<!-- Node 03 -->
+<div class="nav-node flex items-start gap-8 group cursor-pointer" data-target="section-3">
+<div class="relative pt-1">
+<div class="nav-dot w-6 h-6 rounded-full bg-surface border border-muted flex items-center justify-center z-10 relative">
+<div class="w-2 h-2 rounded-full bg-transparent"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<span class="nav-text text-muted text-sm font-medium tracking-[2px] uppercase">03 / Execute</span>
+<h2 class="text-3xl lg:text-4xl font-heading text-text/50 group-[.active]:text-text transition-colors duration-300">Realized Revenue</h2>
+<p class="text-muted text-sm leading-relaxed max-w-xs opacity-0 h-0 overflow-hidden transition-all duration-300 group-[.active]:opacity-100 group-[.active]:h-auto group-[.active]:mt-4">
+                                Processing secured capital with zero-tolerance compliance. The abstract becomes concrete; potential loss is cryptographically logged as top-line growth.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Right Side: Scrolling Content Sections -->
+<div class="w-full md:w-1/2 lg:w-[60%] snap-container no-scrollbar relative bg-surface" id="scroll-container">
+<!-- Section 1: Detect -->
+<section class="snap-section relative flex items-center justify-center overflow-hidden border-b border-muted/10" id="section-1">
+<div class="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none">
+<webgl-shader class="absolute inset-0 w-full h-full" src="{{DATA:ANIMATION:ANIMATION_1}}"></webgl-shader>
+</div>
+<div class="relative z-10 flex flex-col items-center justify-center w-full h-full p-12">
+<div class="w-[80%] aspect-square max-w-lg border border-muted/20 bg-background-dark/50 backdrop-blur-sm p-8 flex flex-col items-center justify-center relative shadow-[0_0_50px_rgba(212,175,55,0.05)]">
+<div class="absolute inset-0 border border-primary/20 scale-[0.95]"></div>
+<span class="material-symbols-outlined text-primary mb-6 text-6xl" data-icon="radar">radar</span>
+<h3 class="font-heading text-2xl text-text mb-4 text-center">Anomaly Detected</h3>
+<div class="font-mono text-xs text-muted/80 bg-background-dark p-4 w-full border border-muted/30">
+<p>&gt; SCANNING NODES...</p>
+<p>&gt; MATCH FOUND: GATEWAY_ERR_503</p>
+<p class="text-primary">&gt; VALUE AT RISK: $14,250.00</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Intervene -->
+<section class="snap-section relative flex items-center justify-center overflow-hidden border-b border-muted/10" id="section-2">
+<div class="absolute inset-0 opacity-40 mix-blend-screen pointer-events-none">
+<webgl-shader class="absolute inset-0 w-full h-full" src="{{DATA:ANIMATION:ANIMATION_2}}"></webgl-shader>
+</div>
+<div class="relative z-10 flex flex-col items-center justify-center w-full h-full p-12">
+<div class="w-[80%] aspect-video max-w-xl border border-primary/30 bg-background-dark/80 backdrop-blur-md p-8 flex flex-col items-center justify-center relative shadow-[0_0_80px_rgba(212,175,55,0.1)]">
+<div class="absolute top-0 left-0 w-2 h-2 bg-primary"></div>
+<div class="absolute bottom-0 right-0 w-2 h-2 bg-primary"></div>
+<div class="flex items-center justify-between w-full mb-8">
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-muted text-4xl mb-2" data-icon="dns">dns</span>
+<span class="text-[10px] uppercase font-mono text-muted">Node Alpha</span>
+</div>
+<!-- The Golden Thread -->
+<div class="flex-1 h-[2px] mx-4 relative bg-muted/20 overflow-hidden">
+<div class="absolute top-0 left-0 h-full w-1/2 bg-primary animate-[slideRight_2s_ease-in-out_infinite]"></div>
+</div>
+<div class="flex flex-col items-center">
+<span class="material-symbols-outlined text-primary text-4xl mb-2" data-icon="security">security</span>
+<span class="text-[10px] uppercase font-mono text-primary">Secure Vault</span>
+</div>
+</div>
+<button class="px-6 py-2 border border-primary/50 text-primary text-xs uppercase tracking-widest hover:bg-primary hover:text-background-dark transition-colors">
+                            Reroute Initiated
+                        </button>
+</div>
+</div>
+</section>
+<!-- Section 3: Execute -->
+<section class="snap-section relative flex items-center justify-center overflow-hidden" id="section-3">
+<div class="absolute inset-0 opacity-20 pointer-events-none flex items-end justify-center pb-20">
+<div class="w-full h-1/2 bg-gradient-to-t from-primary/10 to-transparent"></div>
+</div>
+<div class="relative z-10 flex flex-col items-center justify-center w-full h-full p-12">
+<div class="w-full max-w-2xl bg-surface border border-muted/20 p-8 flex flex-col gap-8 shadow-2xl relative">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-[1px] bg-primary"></div>
+<div class="flex justify-between items-end border-b border-muted/30 pb-4">
+<div>
+<p class="text-xs uppercase tracking-widest text-muted mb-2">Transaction Cleared</p>
+<h3 class="font-heading text-5xl text-primary">$14,250.00</h3>
+</div>
+<div class="text-right">
+<span class="inline-flex items-center gap-1 text-accent text-sm font-mono bg-accent/10 px-2 py-1 border border-accent/20">
+<span class="material-symbols-outlined text-sm" data-icon="arrow_upward">arrow_upward</span>
+                                    RECOVERED
+                                </span>
+</div>
+</div>
+<!-- Bar Chart Representation -->
+<div class="h-48 flex items-end gap-4 justify-between w-full px-4">
+<div class="w-full bg-muted/10 h-[20%] relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-mono text-muted opacity-0 group-hover:opacity-100 transition-opacity">Q1</div>
+</div>
+<div class="w-full bg-muted/10 h-[35%] relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-mono text-muted opacity-0 group-hover:opacity-100 transition-opacity">Q2</div>
+</div>
+<div class="w-full bg-muted/10 h-[15%] relative group">
+<div class="absolute -top-6 left-1/2 -translate-x-1/2 text-[10px] font-mono text-muted opacity-0 group-hover:opacity-100 transition-opacity">Q3</div>
+</div>
+<!-- Gold Bar -->
+<div class="w-full bg-primary h-[85%] relative shadow-[0_0_30px_rgba(212,175,55,0.3)]">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-mono text-primary whitespace-nowrap bg-background-dark px-2 py-1 border border-primary/30">NOW</div>
+</div>
+</div>
+<div class="flex justify-between items-center pt-4 border-t border-muted/10">
+<span class="text-[10px] text-muted font-mono">HASH: 0x8F9A2...C4D1</span>
+<a class="text-xs text-primary uppercase tracking-widest hover:underline flex items-center gap-2" href="#">
+                                View Ledger Entry <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<style>
+        @keyframes slideRight {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
+        }
+    </style>
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scrollContainer = document.getElementById('scroll-container');
+            const sections = document.querySelectorAll('.snap-section');
+            const navNodes = document.querySelectorAll('.nav-node');
+            const progressLine = document.getElementById('progress-line');
+            
+            // Handle clicking on nav nodes to scroll
+            navNodes.forEach((node, index) => {
+                node.addEventListener('click', () => {
+                    const targetId = node.getAttribute('data-target');
+                    const targetSection = document.getElementById(targetId);
+                    
+                    targetSection.scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+
+            // Intersection Observer to update active state based on scroll
+            const observerOptions = {
+                root: scrollContainer,
+                rootMargin: '0px',
+                threshold: 0.5 // Trigger when 50% of the section is visible
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const targetId = entry.target.id;
+                        
+                        // Update active node
+                        navNodes.forEach((node, index) => {
+                            if (node.getAttribute('data-target') === targetId) {
+                                node.classList.add('active');
+                                
+                                // Update node styling
+                                const dot = node.querySelector('.nav-dot');
+                                dot.classList.remove('border-muted');
+                                dot.classList.add('border-primary');
+                                dot.querySelector('div').classList.remove('bg-transparent');
+                                dot.querySelector('div').classList.add('bg-primary');
+                                
+                                const text = node.querySelector('.nav-text');
+                                text.classList.remove('text-muted');
+                                text.classList.add('text-primary');
+
+                                // Update progress line height (rough calculation based on index)
+                                const totalNodes = navNodes.length;
+                                const progressPercentage = totalNodes > 1 ? (index / (totalNodes - 1)) * 100 : 0;
+                                progressLine.style.height = `${progressPercentage}%`;
+                                
+                            } else {
+                                node.classList.remove('active');
+                                
+                                // Reset node styling
+                                const dot = node.querySelector('.nav-dot');
+                                dot.classList.add('border-muted');
+                                dot.classList.remove('border-primary');
+                                dot.querySelector('div').classList.add('bg-transparent');
+                                dot.querySelector('div').classList.remove('bg-primary');
+                                
+                                const text = node.querySelector('.nav-text');
+                                text.classList.add('text-muted');
+                                text.classList.remove('text-primary');
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body></html>

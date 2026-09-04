@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Obsidian Executive - Recovery Gallery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&amp;family=DM+Sans:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#D4AF37",
+          "background-light": "#f8f8f6",
+          "background-dark": "#0A0B0E",
+          "surface": "#16181D",
+          "text": "#EAECEF",
+          "muted": "#6B7280",
+          "accent": "#059669",
+          "border-color": "#2D3748"
+        },
+        fontFamily: {
+          "display": ["DM Sans", "sans-serif"],
+          "heading": ["Cormorant Garamond", "serif"],
+          "body": ["DM Sans", "sans-serif"],
+          "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+        },
+        borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "0px"},
+        transitionProperty: {
+          'height': 'height',
+          'spacing': 'margin, padding',
+        }
+      },
+    },
+  }
+</script>
+<style>
+  body {
+    background-color: theme('colors.background-dark');
+    color: theme('colors.text');
+    font-family: theme('fontFamily.body');
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: theme('fontFamily.heading');
+  }
+  .glass-card {
+    background: linear-gradient(145deg, rgba(22, 24, 29, 0.9) 0%, rgba(10, 11, 14, 0.95) 100%);
+    backdrop-filter: blur(10px);
+  }
+  
+  /* Masonry Grid Setup */
+  .masonry-grid {
+    column-count: 1;
+    column-gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .masonry-grid { column-count: 2; }
+  }
+  @media (min-width: 1024px) {
+    .masonry-grid { column-count: 3; }
+  }
+  .masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Card Hover Effects */
+  .case-card {
+    transition: all 300ms ease;
+    border: 1px solid theme('colors.border-color');
+  }
+  .case-card:hover {
+    transform: translateY(-4px);
+    border-color: theme('colors.primary');
+    box-shadow: 0 10px 30px -10px rgba(212, 175, 55, 0.15);
+  }
+  
+  .log-reveal {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 400ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .case-card:hover .log-reveal {
+    max-height: 200px;
+    opacity: 1;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(45, 55, 72, 0.5);
+  }
+
+  /* Filter Link Animation */
+  .filter-link {
+    position: relative;
+    padding-bottom: 4px;
+  }
+  .filter-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 1px;
+    background-color: theme('colors.primary');
+    transition: all 300ms ease;
+    transform: translateX(-50%);
+  }
+  .filter-link:hover::after, .filter-link.active::after {
+    width: 100%;
+  }
+  .filter-link.active {
+    color: theme('colors.primary');
+  }
+</style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<!-- Shared Top Navigation (Destination Screen) -->
+<div class="relative flex w-full flex-col bg-background-dark dark group/design-root overflow-x-hidden font-body">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 md:px-10 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col w-full max-w-[1200px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-color pb-6 mb-8">
+<div class="flex items-center gap-4 text-text">
+<div class="size-6 text-primary">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-text text-xl font-heading font-bold leading-tight tracking-wide uppercase">Obsidian Executive</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8">
+<div class="hidden md:flex items-center gap-9">
+<a class="text-muted hover:text-text transition-colors text-sm font-medium leading-normal tracking-wide" href="#">Executive Dashboard</a>
+<a class="text-muted hover:text-text transition-colors text-sm font-medium leading-normal tracking-wide" href="#">The Recovery Loop</a>
+<a class="text-primary text-sm font-medium leading-normal tracking-wide" href="#">Recovery Gallery</a>
+<a class="text-muted hover:text-text transition-colors text-sm font-medium leading-normal tracking-wide" href="#">The Bar</a>
+</div>
+<button class="hidden sm:flex min-w-[84px] cursor-pointer items-center justify-center border border-primary bg-transparent hover:bg-primary hover:text-background-dark transition-all duration-300 h-10 px-6 text-primary text-xs font-medium uppercase tracking-[0.15em]">
+<span>INITIALIZE AUDIT</span>
+</button>
+</div>
+</header>
+<!-- Gallery Header -->
+<div class="flex flex-col gap-4 mb-12">
+<h1 class="text-text text-5xl md:text-6xl font-heading leading-tight">Recovery Gallery</h1>
+<p class="text-muted text-base max-w-2xl font-body">Surgical recovery in action. Concrete examples of edge cases our AI detected, intervened, and resolved with cryptographic certainty.</p>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap border-b border-border-color mb-10 gap-x-8 gap-y-4 pb-1">
+<button class="filter-link active text-primary text-xs font-medium uppercase tracking-[0.15em] pb-3" data-filter="all">ALL</button>
+<button class="filter-link text-muted hover:text-text transition-colors text-xs font-medium uppercase tracking-[0.15em] pb-3" data-filter="payment">PAYMENT FAILURES</button>
+<button class="filter-link text-muted hover:text-text transition-colors text-xs font-medium uppercase tracking-[0.15em] pb-3" data-filter="cart">CART ABANDONMENT</button>
+<button class="filter-link text-muted hover:text-text transition-colors text-xs font-medium uppercase tracking-[0.15em] pb-3" data-filter="fraud">FRAUD FALSE-POSITIVES</button>
+</div>
+<!-- Masonry Grid -->
+<div class="masonry-grid" id="gallery-grid">
+<!-- Card 1: Payment Failure -->
+<div class="masonry-item filter-target payment" data-category="payment">
+<div class="case-card bg-surface p-6 h-full flex flex-col relative overflow-hidden group">
+<!-- Glow effect -->
+<div class="absolute -top-20 -right-20 w-40 h-40 bg-primary opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="text-muted">
+<span class="material-symbols-outlined text-2xl" data-icon="ArrowsLeftRight">sync_alt</span>
+</div>
+<div class="bg-primary/10 border border-primary/30 px-3 py-1 text-primary text-xs font-mono font-bold tracking-wider">
+          +$4,250.00
+        </div>
+</div>
+<h3 class="text-2xl font-heading mb-2 text-text">Stripe Routing Failure</h3>
+<p class="text-sm text-muted mb-4 font-body">High-value transaction declined by primary gateway due to intermittent regional timeout. Automatically routed to secondary local acquirer.</p>
+<div class="log-reveal">
+<div class="font-mono text-xs text-accent whitespace-pre-wrap leading-relaxed opacity-80">
+&gt; INIT_BACKUP_GATEWAY
+[14:02:11.043] ERR_GATEWAY_TIMEOUT (Stripe_EU)
+[14:02:11.089] EXECUTING: FAILOVER_ROUTING
+[14:02:11.102] PING: ADYEN_SECONDARY ... OK
+[14:02:11.450] TOKEN_TRANSLATION_SUCCESS
+[14:02:12.001] AUTH_APPROVED (AuthCode: 8992A)
+[14:02:12.005] LEDGER_ENTRY_COMMITTED
+        </div>
+</div>
+</div>
+</div>
+<!-- Card 2: Cart Abandonment -->
+<div class="masonry-item filter-target cart" data-category="cart">
+<div class="case-card bg-surface p-6 h-full flex flex-col relative overflow-hidden group">
+<div class="absolute -top-20 -right-20 w-40 h-40 bg-primary opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="text-muted">
+<span class="material-symbols-outlined text-2xl" data-icon="ShoppingCart">shopping_cart</span>
+</div>
+<div class="bg-primary/10 border border-primary/30 px-3 py-1 text-primary text-xs font-mono font-bold tracking-wider">
+          +$12,400.00
+        </div>
+</div>
+<h3 class="text-2xl font-heading mb-2 text-text">VIP Cart Abandonment</h3>
+<p class="text-sm text-muted mb-4 font-body">Tier-1 customer idled on checkout for 180 seconds. Probability engine detected high risk of session termination. Executed SMS concierage intervention.</p>
+<div class="log-reveal">
+<div class="font-mono text-xs text-accent whitespace-pre-wrap leading-relaxed opacity-80">
+&gt; EXEC_SMS_INTERVENTION
+[09:15:22.110] SESSION_IDLE_WARNING (180s)
+[09:15:22.115] LTV_CHECK: TIER_1_VERIFIED
+[09:15:22.180] GENERATE_MAGIC_LINK (Exp: 15m)
+[09:15:22.400] SMS_DISPATCH: TWILIO_PRIORITY
+[09:18:05.112] MAGIC_LINK_CLICKED
+[09:18:45.990] CHECKOUT_COMPLETE
+        </div>
+</div>
+</div>
+</div>
+<!-- Card 3: Fraud False-Positive -->
+<div class="masonry-item filter-target fraud" data-category="fraud">
+<div class="case-card bg-surface p-6 h-full flex flex-col relative overflow-hidden group">
+<div class="absolute -top-20 -right-20 w-40 h-40 bg-primary opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="text-muted">
+<span class="material-symbols-outlined text-2xl" data-icon="ShieldCheck">gpp_good</span>
+</div>
+<div class="bg-primary/10 border border-primary/30 px-3 py-1 text-primary text-xs font-mono font-bold tracking-wider">
+          +$8,500.00
+        </div>
+</div>
+<h3 class="text-2xl font-heading mb-2 text-text">Legacy Risk Engine Override</h3>
+<p class="text-sm text-muted mb-4 font-body">Legacy fraud provider flagged legitimate enterprise purchase due to IP velocity mismatch. Obsidian verified biometric behavior and overrode decline.</p>
+<div class="log-reveal">
+<div class="font-mono text-xs text-accent whitespace-pre-wrap leading-relaxed opacity-80">
+&gt; OVERRIDE_RISK_SCORE
+[16:44:01.002] DECLINE: FRAUD_SUSPICION (Score: 89)
+[16:44:01.050] INIT_BEHAVIORAL_ANALYSIS
+[16:44:01.120] MATCH: DEVICE_FINGERPRINT_OK
+[16:44:01.125] MATCH: TYPING_CADENCE_VERIFIED
+[16:44:01.300] FORCE_APPROVAL_FLAG_SET
+[16:44:02.100] CAPTURE_SUCCESS
+        </div>
+</div>
+</div>
+</div>
+<!-- Card 4: Payment Failure (Token) -->
+<div class="masonry-item filter-target payment" data-category="payment">
+<div class="case-card bg-surface p-6 h-full flex flex-col relative overflow-hidden group">
+<div class="absolute -top-20 -right-20 w-40 h-40 bg-primary opacity-5 rounded-full blur-3xl group-hover:opacity-10 transition-opacity"></div>
+<div class="flex justify-between items-start mb-6">
+<div class="text-muted">
+<span class="material-symbols-outlined text-2xl" data-icon="CreditCard">credit_card</span>
+</div>
+<div class="bg-primary/10 border border-primary/30 px-3 py-1 text-primary text-xs font-mono font-bold tracking-wider">
+          +$2,400.00
+        </div>
+</div>
+<h3 class="text-2xl font-heading mb-2 text-text">Expired Token Salvage</h3>
+<p class="text-sm text-muted mb-4 font-body">Subscription renewal failed due to expired card credentials. Intervened via Visa/Mastercard Account Updater API prior to customer notification.</p>
+<div class="log-reveal">
+<div class="font-mono text-xs text-accent whitespace-pre-wrap leading-relaxed opacity-80">
+&gt; NETWORK_TOKEN_UPDATE
+[02:00:05.101] BATCH_PROCESS: DECLINED (Code: 54)
+[02:00:05.105] HOLD_CUSTOMER_NOTIFICATION
+[02:00:05.500] REQ: VAU_MC_BILLING_UPDATER
+[02:00:06.200] RES: NEW_PAN_EXPIRY_RECEIVED
+[02:00:06.500] RETRY_WITH_UPDATED_CREDENTIALS
+[02:00:07.100] SUBSCRIPTION_RENEWED
+        </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="flex flex-col gap-6 py-12 mt-12 border-t border-border-color text-center">
+<p class="text-muted text-sm font-mono tracking-wide uppercase">© 2024 Obsidian Executive. Zero-tolerance compliance.</p>
+</footer>
+</div>
+</div>
+</div>
+</div>
+<script>
+  // Simple Filter Logic
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterButtons = document.querySelectorAll('.filter-link');
+    const galleryItems = document.querySelectorAll('.masonry-item');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all
+        filterButtons.forEach(btn => {
+          btn.classList.remove('active', 'text-primary');
+          btn.classList.add('text-muted');
+        });
+        
+        // Add active class to clicked
+        button.classList.add('active', 'text-primary');
+        button.classList.remove('text-muted');
+
+        const filterValue = button.getAttribute('data-filter');
+
+        galleryItems.forEach(item => {
+          // Fade out animation simulation
+          item.style.opacity = '0';
+          
+          setTimeout(() => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+              item.style.display = 'block';
+              // Fade back in
+              setTimeout(() => { item.style.opacity = '1'; }, 50);
+            } else {
+              item.style.display = 'none';
+            }
+          }, 150); // Matches the 150ms fade out requested
+        });
+      });
+    });
+    
+    // Ensure initial state has smooth opacity transition setup
+    galleryItems.forEach(item => {
+      item.style.transition = 'opacity 150ms ease-in-out';
+    });
+  });
+</script>
+</body></html>

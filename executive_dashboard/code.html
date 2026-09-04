@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OBSIDIAN EXECUTIVE DASHBOARD</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#121316",
+                        "muted-slate": "#6B7280",
+                        "surface-container-highest": "#343538",
+                        "tertiary": "#bfcdff",
+                        "on-surface": "#e3e2e6",
+                        "on-primary": "#3c2f00",
+                        "on-secondary-fixed": "#002114",
+                        "on-secondary": "#003825",
+                        "outline": "#99907c",
+                        "border-low": "#2D3748",
+                        "on-background": "#e3e2e6",
+                        "secondary-fixed": "#85f8c4",
+                        "tertiary-fixed": "#dbe1ff",
+                        "outline-variant": "#4d4635",
+                        "surface-container-lowest": "#0d0e11",
+                        "secondary": "#68dba9",
+                        "secondary-container": "#25a475",
+                        "inverse-on-surface": "#303034",
+                        "on-error": "#690005",
+                        "primary-fixed": "#ffe088",
+                        "on-error-container": "#ffdad6",
+                        "surface-bright": "#38393c",
+                        "tertiary-container": "#97b0ff",
+                        "on-tertiary-fixed": "#00174b",
+                        "on-tertiary-container": "#254188",
+                        "surface-tint": "#e9c349",
+                        "on-secondary-fixed-variant": "#005137",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "surface-container": "#1f1f23",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-secondary-container": "#00311f",
+                        "surface": "#16181D",
+                        "primary-container": "#d4af37",
+                        "error": "#ffb4ab",
+                        "surface-container-low": "#1b1b1f",
+                        "inverse-primary": "#735c00",
+                        "on-primary-fixed": "#241a00",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#27438a",
+                        "error-red": "#EF4444",
+                        "text-pearl": "#EAECEF",
+                        "on-surface-variant": "#d0c5af",
+                        "on-primary-fixed-variant": "#574500",
+                        "surface-container-high": "#292a2d",
+                        "inverse-surface": "#e3e2e6",
+                        "on-tertiary": "#082b72",
+                        "primary": "#f2ca50",
+                        "background": "#121316",
+                        "surface-variant": "#343538",
+                        "secondary-fixed-dim": "#68dba9",
+                        "on-primary-container": "#554300"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "section-gap": "120px",
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Syne", "sans-serif"],
+                        "body-lg": ["JetBrains Mono", "monospace"],
+                        "display": ["Syne", "sans-serif"],
+                        "headline-lg": ["Syne", "sans-serif"],
+                        "metric": ["JetBrains Mono", "monospace"],
+                        "label-caps": ["JetBrains Mono", "monospace"],
+                        "body-md": ["JetBrains Mono", "monospace"],
+                        "headline-md": ["Syne", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display": ["80px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "metric": ["32px", { "lineHeight": "1", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Syne:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            background-color: #121316; /* background */
+            color: #e3e2e6; /* on-surface */
+        }
+        
+        /* Custom Animations */
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-ticker {
+            animation: ticker 20s linear infinite;
+        }
+
+        @keyframes scanline {
+            0% { transform: translateY(-100%); opacity: 0; }
+            50% { opacity: 0.1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+        .scanline-effect::after {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, transparent, rgba(242, 202, 80, 0.2), transparent);
+            pointer-events: none;
+            animation: scanline 4s linear infinite;
+            z-index: 9999;
+        }
+
+        /* Button hover styles based on guide */
+        .btn-primary:hover {
+            background-color: #f2ca50;
+            color: #121316;
+        }
+        
+        /* Glassmorphism for specific panels */
+        .glass-panel {
+            background: rgba(22, 24, 29, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="font-body-md min-h-screen flex flex-col scanline-effect">
+<!-- TopAppBar JSON Component -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center h-[120px] px-margin-desktop bg-surface-dim border-b border-border-low">
+<div class="font-display text-headline-md font-bold tracking-tighter text-primary">
+            OBSIDIAN
+        </div>
+<nav class="hidden md:flex gap-8">
+<a class="text-primary border-b-2 border-primary pb-1 font-headline-md text-headline-md font-label-caps text-label-caps cursor-pointer active:scale-95 hover:translate-y-[-4px] transition-transform duration-200" href="#">Dashboard</a>
+<a class="text-muted-slate hover:text-on-surface transition-colors font-headline-md text-headline-md font-label-caps text-label-caps cursor-pointer active:scale-95 hover:translate-y-[-4px] transition-transform duration-200" href="#">Recovery Loop</a>
+<a class="text-muted-slate hover:text-on-surface transition-colors font-headline-md text-headline-md font-label-caps text-label-caps cursor-pointer active:scale-95 hover:translate-y-[-4px] transition-transform duration-200" href="#">Gallery</a>
+<a class="text-muted-slate hover:text-on-surface transition-colors font-headline-md text-headline-md font-label-caps text-label-caps cursor-pointer active:scale-95 hover:translate-y-[-4px] transition-transform duration-200" href="#">The Bar</a>
+</nav>
+<button class="hidden md:block btn-primary border border-primary text-primary px-6 py-3 font-label-caps text-label-caps uppercase transition-colors duration-300" id="auditBtn">
+            Initialize Audit
+        </button>
+</header>
+<!-- Main Layout with SideNav -->
+<div class="flex flex-1 pt-[120px]">
+<!-- SideNavBar JSON Component (Desktop) -->
+<aside class="hidden md:flex fixed left-0 top-0 h-full flex-col pt-[120px] pb-8 w-[280px] bg-surface-container-lowest border-r border-border-low z-40">
+<div class="px-6 mb-8">
+<h2 class="font-headline-md text-headline-md text-primary mb-1">EXECUTIVE TERMINAL</h2>
+<p class="font-label-caps text-label-caps text-muted-slate">Auth Level: Tier 1</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 text-primary bg-surface-container-high border-l-2 border-primary font-label-caps text-label-caps transition-all duration-300" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">analytics</span>
+                    Overview
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-muted-slate hover:text-on-surface hover:bg-surface-container transition-all duration-300 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">receipt_long</span>
+                    Live Ledger
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-muted-slate hover:text-on-surface hover:bg-surface-container transition-all duration-300 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">terminal</span>
+                    Terminal
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-muted-slate hover:text-on-surface hover:bg-surface-container transition-all duration-300 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">lock</span>
+                    Vault
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-muted-slate hover:text-on-surface hover:bg-surface-container transition-all duration-300 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">settings</span>
+                    Settings
+                </a>
+</nav>
+<div class="px-6 mb-6">
+<button class="w-full btn-primary border border-primary text-primary py-3 font-label-caps text-label-caps uppercase transition-colors duration-300">
+                    New Recovery
+                </button>
+</div>
+<div class="px-4 space-y-2 mt-auto">
+<a class="flex items-center gap-3 px-4 py-2 text-muted-slate hover:text-on-surface hover:bg-surface-container transition-all duration-300 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">help</span>
+                    Support
+                </a>
+<a class="flex items-center gap-3 px-4 py-2 text-muted-slate hover:text-on-surface hover:bg-surface-container transition-all duration-300 font-label-caps text-label-caps" href="#">
+<span class="material-symbols-outlined">history</span>
+                    Logs
+                </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 md:ml-[280px] p-margin-mobile md:p-margin-desktop w-full max-w-container-max mx-auto overflow-y-auto pb-32">
+<!-- Hero Section -->
+<section class="mb-section-gap relative">
+<!-- Background visual element -->
+<div class="absolute inset-0 z-0 opacity-20 pointer-events-none" style="background: radial-gradient(circle at 50% 50%, rgba(242, 202, 80, 0.15) 0%, transparent 60%);"></div>
+<div class="relative z-10 flex flex-col md:flex-row justify-between items-end gap-8">
+<div class="max-w-2xl">
+<h1 class="font-display text-headline-lg-mobile md:text-display text-on-surface mb-4">Silent Leaks.<br/><span class="text-primary">Surgical Recovery.</span></h1>
+<p class="font-body-lg text-body-lg text-muted-slate">Advanced cryptographic auditing protocol active. System status nominal.</p>
+</div>
+</div>
+</section>
+<!-- Audit Loading State Overlay (Hidden by default) -->
+<div class="hidden fixed inset-0 z-[100] bg-surface-dim/90 backdrop-blur-md flex flex-col items-center justify-center p-8" id="auditOverlay">
+<div class="w-full max-w-md border border-border-low bg-surface p-8 relative overflow-hidden">
+<!-- Scanning line for loading -->
+<div class="absolute top-0 left-0 h-1 bg-primary w-full origin-left transform scale-x-0 transition-transform duration-[3000ms] ease-in-out" id="auditProgress"></div>
+<h3 class="font-headline-md text-headline-md text-primary mb-6">AUDIT IN PROGRESS</h3>
+<div class="space-y-4 font-body-md text-body-md text-muted-slate" id="auditLogs">
+<p class="opacity-0 transition-opacity duration-300">&gt; Initiating deep scan...</p>
+</div>
+<div class="mt-8 hidden border-t border-border-low pt-4" id="auditResult">
+<p class="text-secondary font-label-caps text-label-caps mb-2">AUDIT COMPLETE</p>
+<p class="font-metric text-metric text-on-surface">3 Anomalies Detected.</p>
+<button class="mt-6 border border-border-low px-4 py-2 text-label-caps font-label-caps hover:border-primary hover:text-primary transition-colors" id="closeAuditBtn">Acknowledge</button>
+</div>
+</div>
+</div>
+<!-- Metrics Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-section-gap">
+<!-- Card 1 -->
+<div class="bg-surface border border-border-low p-6 relative group hover:translate-y-[-4px] transition-transform duration-200 border-t-2 border-t-primary">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-primary text-4xl">payments</span>
+</div>
+<p class="font-label-caps text-label-caps text-muted-slate mb-2">Recovered Today</p>
+<p class="font-metric text-metric text-on-surface">$142,500</p>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-secondary flex items-center font-label-caps text-[10px]"><span class="material-symbols-outlined text-sm mr-1">arrow_upward</span> +12.4%</span>
+<span class="text-muted-slate text-[10px] font-label-caps">VS YESTERDAY</span>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface border border-border-low p-6 relative group hover:translate-y-[-4px] transition-transform duration-200">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-primary text-4xl">autorenew</span>
+</div>
+<p class="font-label-caps text-label-caps text-muted-slate mb-2">Active Recoveries</p>
+<p class="font-metric text-metric text-on-surface">42</p>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-muted-slate flex items-center font-label-caps text-[10px]"><span class="material-symbols-outlined text-sm mr-1">sync</span> IN PROGRESS</span>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface border border-border-low p-6 relative group hover:translate-y-[-4px] transition-transform duration-200">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-primary text-4xl">check_circle</span>
+</div>
+<p class="font-label-caps text-label-caps text-muted-slate mb-2">Success Rate</p>
+<p class="font-metric text-metric text-on-surface">99.9%</p>
+<div class="mt-4 flex items-center gap-2">
+<span class="text-secondary font-label-caps text-[10px] border border-secondary px-1">OPTIMAL</span>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Ticker Component (Fixed Bottom) -->
+<div class="fixed bottom-0 w-full md:w-[calc(100%-280px)] md:ml-[280px] h-12 bg-surface border-t border-border-low overflow-hidden flex items-center z-40">
+<div class="flex whitespace-nowrap animate-ticker font-label-caps text-label-caps text-primary">
+<!-- Ticker items will be populated by JS -->
+<span class="px-8 flex items-center gap-2"><span class="w-2 h-2 bg-secondary rounded-full inline-block"></span> TX_8891: $14,200 Recovered</span>
+<span class="px-8 flex items-center gap-2"><span class="w-2 h-2 bg-secondary rounded-full inline-block"></span> TX_8892: $3,450 Recovered</span>
+<span class="px-8 flex items-center gap-2"><span class="w-2 h-2 bg-primary rounded-full inline-block animate-pulse"></span> TX_8893: $89,000 In Progress</span>
+<span class="px-8 flex items-center gap-2"><span class="w-2 h-2 bg-secondary rounded-full inline-block"></span> TX_8894: $1,200 Recovered</span>
+<span class="px-8 flex items-center gap-2"><span class="w-2 h-2 bg-secondary rounded-full inline-block"></span> TX_8891: $14,200 Recovered</span>
+</div>
+</div>
+<!-- Footer JSON Component -->
+<footer class="w-full py-8 px-margin-desktop flex flex-col md:flex-row justify-between items-center bg-surface-dim border-t border-border-low z-30 relative md:ml-[280px] md:w-[calc(100%-280px)] mb-12">
+<div class="font-headline-md text-headline-md text-primary mb-4 md:mb-0">OBSIDIAN</div>
+<div class="flex gap-6 mb-4 md:mb-0">
+<a class="font-label-caps text-label-caps text-muted-slate hover:text-primary transition-colors duration-200" href="#">Security Protocol</a>
+<a class="font-label-caps text-label-caps text-muted-slate hover:text-primary transition-colors duration-200" href="#">API Documentation</a>
+<a class="font-label-caps text-label-caps text-muted-slate hover:text-primary transition-colors duration-200" href="#">Compliance Audit</a>
+</div>
+<div class="font-label-caps text-label-caps text-muted-slate">
+            © 2024 OBSIDIAN EXECUTIVE. SECURE REVENUE RECOVERY.
+        </div>
+</footer>
+<script>
+        // Audit Simulation Logic
+        const auditBtn = document.getElementById('auditBtn');
+        const auditOverlay = document.getElementById('auditOverlay');
+        const auditProgress = document.getElementById('auditProgress');
+        const auditLogs = document.getElementById('auditLogs');
+        const auditResult = document.getElementById('auditResult');
+        const closeAuditBtn = document.getElementById('closeAuditBtn');
+
+        const simulationSteps = [
+            "> Establishing secure connection...",
+            "> Bypassing standard ledger constraints...",
+            "> Analyzing deep node transaction history...",
+            "> Cross-referencing missing hashes...",
+            "> Isolating silent leaks..."
+        ];
+
+        auditBtn.addEventListener('click', () => {
+            // Reset state
+            auditOverlay.classList.remove('hidden');
+            auditProgress.style.transform = 'scaleX(0)';
+            auditResult.classList.add('hidden');
+            auditLogs.innerHTML = '<p class="opacity-100">> Initiating deep scan...</p>';
+            
+            // Start progress bar animation
+            setTimeout(() => {
+                auditProgress.style.transform = 'scaleX(1)';
+            }, 50);
+
+            // Simulate log updates
+            let step = 0;
+            const interval = setInterval(() => {
+                if (step < simulationSteps.length) {
+                    const p = document.createElement('p');
+                    p.textContent = simulationSteps[step];
+                    p.className = 'opacity-0 transition-opacity duration-300';
+                    auditLogs.appendChild(p);
+                    
+                    // Trigger reflow for animation
+                    void p.offsetWidth;
+                    p.classList.remove('opacity-0');
+                    p.classList.add('opacity-100');
+                    
+                    step++;
+                } else {
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        auditResult.classList.remove('hidden');
+                    }, 500);
+                }
+            }, 500);
+        });
+
+        closeAuditBtn.addEventListener('click', () => {
+            auditOverlay.classList.add('hidden');
+        });
+    </script>
+</body></html>

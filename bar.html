@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Obsidian Executive - The Bar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#D4AF37",
+          "background-light": "#f8f8f6",
+          "background-dark": "#0A0B0E",
+          "surface": "#16181D",
+          "text": "#EAECEF",
+          "muted": "#6B7280",
+          "accent": "#059669",
+        },
+        fontFamily: {
+          "heading": ["Cormorant Garamond", "serif"],
+          "body": ["DM Sans", "sans-serif"],
+          "mono": ["Courier New", "monospace"],
+        },
+        borderRadius: {"DEFAULT": "0px", "lg": "0px", "xl": "0px", "full": "0px"},
+      },
+    },
+  }
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&amp;family=DM+Sans:wght@400;500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+  body {
+    font-family: var(--font-body), sans-serif;
+    background-color: var(--color-background-dark);
+    color: var(--color-text);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), serif;
+  }
+</style>
+</head>
+<body class="bg-background-dark text-text min-h-screen flex flex-col antialiased">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[1200px] flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-muted/30 px-4 md:px-10 py-4 mb-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M42.4379 44C42.4379 44 36.0744 33.9038 41.1692 24C46.8624 12.9336 42.2078 4 42.2078 4L7.01134 4C7.01134 4 11.6577 12.932 5.96912 23.9969C0.876273 33.9029 7.27094 44 7.27094 44L42.4379 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-text text-xl font-heading font-bold leading-tight tracking-wide">Obsidian Executive</h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 hidden md:flex">
+<div class="flex items-center gap-8">
+<a class="text-text hover:text-primary transition-colors text-xs font-body font-medium leading-normal uppercase tracking-widest" href="#">Dashboard</a>
+<a class="text-text hover:text-primary transition-colors text-xs font-body font-medium leading-normal uppercase tracking-widest" href="#">Recovery Loop</a>
+<a class="text-text hover:text-primary transition-colors text-xs font-body font-medium leading-normal uppercase tracking-widest" href="#">Gallery</a>
+<a class="text-primary text-xs font-body font-medium leading-normal uppercase tracking-widest border-b border-primary pb-1" href="#">The Bar</a>
+</div>
+</div>
+</header>
+<main class="flex-1 flex flex-col md:flex-row gap-8 px-4 md:px-0">
+<section class="flex-1 flex flex-col gap-6">
+<div class="flex justify-between items-end mb-4">
+<div>
+<h1 class="text-primary font-heading text-4xl md:text-5xl font-bold mb-2">Immutable Ledger</h1>
+<p class="text-muted font-body text-sm max-w-md">Cryptographically verifiable record of all automated interventions and compliance checks.</p>
+</div>
+<div class="flex gap-4 opacity-50 grayscale hover:grayscale-0 transition-all duration-300">
+<span class="text-xs font-mono border border-muted/30 px-2 py-1 uppercase">SOC2</span>
+<span class="text-xs font-mono border border-muted/30 px-2 py-1 uppercase">PCI-DSS</span>
+<span class="text-xs font-mono border border-muted/30 px-2 py-1 uppercase">ISO27001</span>
+</div>
+</div>
+<div class="bg-surface border border-muted/20">
+<table class="w-full text-left font-body text-sm">
+<thead>
+<tr class="border-b border-muted/30 bg-background-dark text-muted uppercase text-xs tracking-wider">
+<th class="px-4 py-4 font-medium">Time (EST)</th>
+<th class="px-4 py-4 font-medium">Event Type</th>
+<th class="px-4 py-4 font-medium hidden sm:table-cell">Tx Hash</th>
+<th class="px-4 py-4 font-medium text-right">Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-muted/10 hover:bg-background-dark/50 transition-colors cursor-pointer group" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<td class="px-4 py-5 text-muted font-mono text-xs">14:02:05</td>
+<td class="px-4 py-5 text-text group-hover:text-primary transition-colors">Payment Routing Recovery</td>
+<td class="px-4 py-5 text-muted font-mono text-xs hidden sm:table-cell">0x8f...3a2b</td>
+<td class="px-4 py-5 text-right"><span class="text-accent font-medium uppercase text-xs tracking-wider">Verified</span></td>
+</tr>
+<tr class="hidden bg-background-dark border-b border-muted/20">
+<td class="px-4 py-4" colspan="4">
+<div class="bg-surface p-4 font-mono text-xs text-primary/80 border-l-2 border-primary overflow-x-auto">
+{<br/>
+  "event_id": "evt_9b1c3d",<br/>
+  "type": "payment_intent.succeeded",<br/>
+  "amount": 1425000,<br/>
+  "currency": "usd",<br/>
+  "signature": "sig_2c4d5f8f3a2b..."<br/>
+}
+</div>
+</td>
+</tr>
+<tr class="border-b border-muted/10 hover:bg-background-dark/50 transition-colors cursor-pointer group" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<td class="px-4 py-5 text-muted font-mono text-xs">13:45:12</td>
+<td class="px-4 py-5 text-text group-hover:text-primary transition-colors">Cart Abandonment Intercept</td>
+<td class="px-4 py-5 text-muted font-mono text-xs hidden sm:table-cell">0x7a...9f1e</td>
+<td class="px-4 py-5 text-right"><span class="text-accent font-medium uppercase text-xs tracking-wider">Verified</span></td>
+</tr>
+<tr class="hidden bg-background-dark border-b border-muted/20">
+<td class="px-4 py-4" colspan="4">
+<div class="bg-surface p-4 font-mono text-xs text-primary/80 border-l-2 border-primary overflow-x-auto">
+{<br/>
+  "event_id": "evt_7a9f1e",<br/>
+  "type": "cart.recovered",<br/>
+  "value": 8500,<br/>
+  "intervention_type": "dynamic_pricing_adjustment",<br/>
+  "signature": "sig_5e8g2h1k4m..."<br/>
+}
+</div>
+</td>
+</tr>
+<tr class="border-b border-muted/10 hover:bg-background-dark/50 transition-colors cursor-pointer group" onclick="this.nextElementSibling.classList.toggle('hidden')">
+<td class="px-4 py-5 text-muted font-mono text-xs">12:30:00</td>
+<td class="px-4 py-5 text-text group-hover:text-primary transition-colors">Fraud False-Positive Reversal</td>
+<td class="px-4 py-5 text-muted font-mono text-xs hidden sm:table-cell">0x2c...4d5f</td>
+<td class="px-4 py-5 text-right"><span class="text-accent font-medium uppercase text-xs tracking-wider">Verified</span></td>
+</tr>
+<tr class="hidden bg-background-dark border-b border-muted/20">
+<td class="px-4 py-4" colspan="4">
+<div class="bg-surface p-4 font-mono text-xs text-primary/80 border-l-2 border-primary overflow-x-auto">
+{<br/>
+  "event_id": "evt_2c4d5f",<br/>
+  "type": "fraud.override",<br/>
+  "risk_score_initial": 89,<br/>
+  "risk_score_adjusted": 12,<br/>
+  "signature": "sig_9j3n7p5q2r..."<br/>
+}
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<aside class="w-full md:w-80 flex flex-col gap-4">
+<div class="bg-surface border border-muted/20 p-4 h-full min-h-[300px] flex flex-col">
+<div class="text-muted text-xs uppercase tracking-widest mb-4 border-b border-muted/20 pb-2">Compliance Terminal</div>
+<div class="font-mono text-xs text-accent space-y-2 flex-1 overflow-y-auto">
+<p>&gt; INIT SECURE CONTEXT</p>
+<p class="opacity-70">Loading cryptographic modules...</p>
+<p>&gt; VERIFY LEDGER STATE</p>
+<p class="opacity-70">Block height: 849,211</p>
+<p class="opacity-70">Consensus: VALID</p>
+<p>&gt; TAIL AUDIT_LOG</p>
+<p class="text-primary">&gt; AWAITING INCOMING EVENTS<span class="animate-pulse">_</span></p>
+</div>
+</div>
+</aside>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>

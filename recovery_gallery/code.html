@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OBSIDIAN - Gallery</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Syne:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .clip-edges {
+                clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#121316",
+                        "muted-slate": "#6B7280",
+                        "surface-container-highest": "#343538",
+                        "tertiary": "#bfcdff",
+                        "on-surface": "#e3e2e6",
+                        "on-primary": "#3c2f00",
+                        "on-secondary-fixed": "#002114",
+                        "on-secondary": "#003825",
+                        "outline": "#99907c",
+                        "border-low": "#2D3748",
+                        "on-background": "#e3e2e6",
+                        "secondary-fixed": "#85f8c4",
+                        "tertiary-fixed": "#dbe1ff",
+                        "outline-variant": "#4d4635",
+                        "surface-container-lowest": "#0d0e11",
+                        "secondary": "#68dba9",
+                        "secondary-container": "#25a475",
+                        "inverse-on-surface": "#303034",
+                        "on-error": "#690005",
+                        "primary-fixed": "#ffe088",
+                        "on-error-container": "#ffdad6",
+                        "surface-bright": "#38393c",
+                        "tertiary-container": "#97b0ff",
+                        "on-tertiary-fixed": "#00174b",
+                        "on-tertiary-container": "#254188",
+                        "surface-tint": "#e9c349",
+                        "on-secondary-fixed-variant": "#005137",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "surface-container": "#1f1f23",
+                        "primary-fixed-dim": "#e9c349",
+                        "on-secondary-container": "#00311f",
+                        "surface": "#16181D",
+                        "primary-container": "#d4af37",
+                        "error": "#ffb4ab",
+                        "surface-container-low": "#1b1b1f",
+                        "inverse-primary": "#735c00",
+                        "on-primary-fixed": "#241a00",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#27438a",
+                        "error-red": "#EF4444",
+                        "text-pearl": "#EAECEF",
+                        "on-surface-variant": "#d0c5af",
+                        "on-primary-fixed-variant": "#574500",
+                        "surface-container-high": "#292a2d",
+                        "inverse-surface": "#e3e2e6",
+                        "on-tertiary": "#082b72",
+                        "primary": "#f2ca50",
+                        "background": "#121316",
+                        "surface-variant": "#343538",
+                        "secondary-fixed-dim": "#68dba9",
+                        "on-primary-container": "#554300"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0px",
+                        "lg": "0px",
+                        "xl": "0px",
+                        "full": "0px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "section-gap": "120px",
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "gutter": "24px",
+                        "container-max": "1440px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Syne"],
+                        "body-lg": ["JetBrains Mono"],
+                        "display": ["Syne"],
+                        "headline-lg": ["Syne"],
+                        "metric": ["JetBrains Mono"],
+                        "label-caps": ["JetBrains Mono"],
+                        "body-md": ["JetBrains Mono"],
+                        "headline-md": ["Syne"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["32px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display": ["80px", { "lineHeight": "1.1", "letterSpacing": "-0.04em", "fontWeight": "800" }],
+                        "headline-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "metric": ["32px", { "lineHeight": "1", "letterSpacing": "-0.02em", "fontWeight": "500" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.15em", "fontWeight": "700" }],
+                        "body-md": ["14px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col pt-[120px]">
+<!-- Shared TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center h-[120px] px-margin-desktop bg-surface-dim border-b border-border-low">
+<div class="flex items-center gap-12">
+<h1 class="font-display text-headline-md font-bold tracking-tighter text-primary">OBSIDIAN</h1>
+<nav class="hidden md:flex gap-8">
+<a class="font-label-caps text-label-caps text-muted-slate hover:text-on-surface transition-colors" href="#">Dashboard</a>
+<a class="font-label-caps text-label-caps text-muted-slate hover:text-on-surface transition-colors" href="#">Recovery Loop</a>
+<a class="font-label-caps text-label-caps text-primary border-b-2 border-primary pb-1" href="#">Gallery</a>
+<a class="font-label-caps text-label-caps text-muted-slate hover:text-on-surface transition-colors" href="#">The Bar</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<button class="font-label-caps text-label-caps border border-primary text-primary px-6 py-3 uppercase hover:bg-primary hover:text-on-primary transition-colors">Initialize Audit</button>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col md:flex-row w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-12 gap-gutter">
+<!-- Filters Sidebar (Desktop) / Top (Mobile) -->
+<aside class="w-full md:w-[280px] shrink-0 border border-border-low bg-surface-container-lowest p-6 flex flex-col gap-6 h-fit">
+<div class="font-label-caps text-label-caps text-primary mb-4 border-b border-border-low pb-2">VECTOR FILTERS</div>
+<div class="flex flex-col gap-3">
+<button class="text-left font-label-caps text-label-caps text-primary bg-surface-container-high border-l-2 border-primary pl-4 py-2 hover:translate-y-[-4px] transition-transform duration-200">ALL</button>
+<button class="text-left font-label-caps text-label-caps text-muted-slate hover:text-on-surface transition-colors pl-4 py-2 hover:translate-y-[-4px] duration-200">PAYMENT FAILURES</button>
+<button class="text-left font-label-caps text-label-caps text-muted-slate hover:text-on-surface transition-colors pl-4 py-2 hover:translate-y-[-4px] duration-200">CART ABANDONMENT</button>
+<button class="text-left font-label-caps text-label-caps text-muted-slate hover:text-on-surface transition-colors pl-4 py-2 hover:translate-y-[-4px] duration-200">FRAUD FALSE-POSITIVES</button>
+</div>
+<div class="mt-8 pt-8 border-t border-border-low">
+<div class="font-metric text-metric text-primary">$1.2M</div>
+<div class="font-label-caps text-label-caps text-muted-slate mt-2">TOTAL RECOVERED (YTD)</div>
+</div>
+</aside>
+<!-- Gallery Grid -->
+<section class="flex-grow">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Card 1 -->
+<div class="group relative border border-border-low bg-surface cursor-pointer hover:border-primary hover:translate-y-[-4px] transition-all duration-300" onclick="document.getElementById('recovery-modal').classList.remove('hidden')">
+<div class="p-6 flex flex-col gap-4 h-full relative z-10 bg-surface">
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-secondary-fixed">SUCCESS</span>
+<span class="font-body-md text-muted-slate">#RCV-092</span>
+</div>
+<div>
+<div class="font-metric text-metric text-on-surface mb-1">$4,500.00</div>
+<div class="font-label-caps text-label-caps text-primary">PAYMENT FAILURE</div>
+</div>
+<div class="font-body-md text-muted-slate mt-auto pt-4 border-t border-border-low">Source: Stripe Webhook</div>
+</div>
+<!-- Hover Log Snippet -->
+<div class="absolute inset-0 bg-surface-container-highest p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col justify-center">
+<pre class="font-body-md text-primary text-xs leading-tight whitespace-pre-wrap">&gt; INIT_RECOVERY_SEQ
+&gt; TRACE_ID: STR-9821
+&gt; BYPASS_GATEWAY: TRUE
+&gt; RE-AUTH_ATTEMPT: 1
+&gt; STATUS: 200 OK
+&gt; FUNDS_SECURED.
+                        </pre>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="group relative border border-border-low bg-surface cursor-pointer hover:border-primary hover:translate-y-[-4px] transition-all duration-300" onclick="document.getElementById('recovery-modal').classList.remove('hidden')">
+<div class="p-6 flex flex-col gap-4 h-full relative z-10 bg-surface border-t-2 border-primary">
+<div class="flex justify-between items-start">
+<span class="font-label-caps text-label-caps text-primary">IN PROGRESS</span>
+<span class="font-body-md text-muted-slate">#RCV-093</span>
+</div>
+<div>
+<div class="font-metric text-metric text-on-surface mb-1">$12,850.00</div>
+<div class="font-label-caps text-label-caps text-primary">FRAUD FALSE-POSITIVE</div>
+</div>
+<div class="font-body-md text-muted-slate mt-auto pt-4 border-t border-border-low">Source: Risk Engine Alpha</div>
+</div>
+<!-- Hover Log Snippet -->
+<div class="absolute inset-0 bg-surface-container-highest p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 flex flex-col justify-center">
+<pre class="font-body-md text-primary text-xs leading-tight whitespace-pre-wrap">&gt; OVERRIDE_RISK_SCORE
+&gt; MANUAL_INTERVENTION
+&gt; VALIDATING_GEOIP...
+&gt; PENDING_VERIFICATION
+                        </pre>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Modal -->
+<div class="fixed inset-0 z-[100] bg-surface-dim/90 hidden flex items-center justify-center p-4 backdrop-blur-sm" id="recovery-modal">
+<div class="bg-surface border border-primary w-full max-w-3xl flex flex-col relative shadow-[0_0_40px_rgba(212,175,55,0.1)]">
+<button class="absolute top-4 right-4 text-muted-slate hover:text-primary transition-colors" onclick="document.getElementById('recovery-modal').classList.add('hidden')">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div class="p-8 border-b border-border-low">
+<h2 class="font-headline-md text-headline-md text-primary mb-2">RECOVERY SEQUENCE DETAILED</h2>
+<div class="font-label-caps text-label-caps text-muted-slate">CASE ID: #RCV-092 | TIMESTAMP: 2024-10-27T08:14:02Z</div>
+</div>
+<div class="p-8 flex-grow flex flex-col gap-8">
+<!-- Flow Visualization -->
+<div class="flex items-center justify-between relative">
+<!-- Line -->
+<div class="absolute top-1/2 left-0 w-full h-[1px] bg-border-low -z-10"></div>
+<div class="absolute top-1/2 left-0 w-2/3 h-[1px] bg-primary -z-10 shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
+<!-- Nodes -->
+<div class="flex flex-col items-center gap-2 bg-surface p-2">
+<div class="w-4 h-4 bg-primary rounded-none border border-primary shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
+<span class="font-label-caps text-label-caps text-primary">DETECT</span>
+</div>
+<div class="flex flex-col items-center gap-2 bg-surface p-2">
+<div class="w-4 h-4 bg-primary rounded-none border border-primary shadow-[0_0_10px_rgba(212,175,55,0.5)]"></div>
+<span class="font-label-caps text-label-caps text-primary">INTERVENE</span>
+</div>
+<div class="flex flex-col items-center gap-2 bg-surface p-2">
+<div class="w-4 h-4 bg-surface-container-highest border border-border-low rounded-none"></div>
+<span class="font-label-caps text-label-caps text-muted-slate">EXECUTE</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-border-low p-4">
+<pre class="font-body-md text-on-surface text-sm whitespace-pre-wrap">[08:14:02] DETECT: Payment failure caught at Stripe gateway.
+[08:14:03] INTERVENE: Analyzing failure reason (insufficient_funds).
+[08:14:04] INTERVENE: Triggering smart retry schedule (T+2hrs).
+[--:--:--] EXECUTE: Awaiting execution window...
+                     </pre>
+</div>
+</div>
+<div class="p-8 border-t border-border-low flex justify-end">
+<button class="font-label-caps text-label-caps border border-primary text-primary px-6 py-3 uppercase hover:bg-primary hover:text-on-primary transition-colors">
+                    VIEW AUDIT IN THE BAR
+                </button>
+</div>
+</div>
+</div>
+<!-- Shared Footer -->
+<footer class="w-full py-8 px-margin-desktop flex justify-between items-center bg-surface-dim mt-section-gap border-t border-border-low">
+<div class="font-headline-md text-headline-md text-primary">OBSIDIAN</div>
+<div class="flex gap-6 font-label-caps text-label-caps text-muted-slate">
+<a class="hover:text-primary transition-colors duration-200" href="#">Security Protocol</a>
+<a class="hover:text-primary transition-colors duration-200" href="#">API Documentation</a>
+<a class="hover:text-primary transition-colors duration-200" href="#">Compliance Audit</a>
+</div>
+<div class="font-label-caps text-label-caps text-muted-slate">
+            © 2024 OBSIDIAN EXECUTIVE. SECURE REVENUE RECOVERY.
+        </div>
+</footer>
+</body></html>

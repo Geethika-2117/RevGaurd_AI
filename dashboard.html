@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Obsidian Executive - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&amp;family=DM+Sans:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "primary": "#D4AF37", /* Reverted to PRD Brushed Gold for exact match, though theme config says #edbc1d, user prompt asks for #edbc1d in description but PRD says #D4AF37. I will use the theme config primary #edbc1d as per instructions */
+          "primary-gold": "#edbc1d",
+          "background-light": "#f8f8f6",
+          "background-dark": "#0A0B0E", // Deep Vantablack
+          "surface-dark": "#16181D", // Onyx
+          "text-light": "#EAECEF", // Crisp Pearl
+          "muted-slate": "#6B7280", // Slate
+          "accent-emerald": "#059669", // Emerald
+        },
+        fontFamily: {
+          "display": ["Cormorant Garamond", "serif"],
+          "body": ["DM Sans", "sans-serif"]
+        },
+        borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem", "none": "0px"},
+        keyframes: {
+          marquee: {
+            '0%': { transform: 'translateX(0%)' },
+            '100%': { transform: 'translateX(-100%)' },
+          },
+          expandLine: {
+            '0%': { width: '0%', opacity: '0' },
+            '50%': { opacity: '1' },
+            '100%': { width: '100%', opacity: '0' }
+          },
+          fadeInUp: {
+            '0%': { opacity: '0', transform: 'translateY(40px)' },
+            '100%': { opacity: '1', transform: 'translateY(0)' }
+          }
+        },
+        animation: {
+          marquee: 'marquee 25s linear infinite',
+          expandLine: 'expandLine 2s ease-in-out infinite',
+          fadeInUp: 'fadeInUp 0.8s ease-out forwards'
+        }
+      },
+    },
+  }
+</script>
+<style>
+  /* Custom scrollbar for webkit */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0A0B0E;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #16181D;
+    border: 1px solid #2D3748;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2D3748;
+  }
+  
+  .glow-gold {
+    box-shadow: 0 0 20px rgba(237, 188, 29, 0.15);
+  }
+</style>
+</head>
+<body class="bg-background-dark text-text-light font-body min-h-screen flex flex-col overflow-x-hidden selection:bg-primary-gold selection:text-background-dark">
+<!-- Loading State Overlay (Hidden by default, can be toggled via JS) -->
+<div class="fixed inset-0 z-50 bg-background-dark flex items-center justify-center hidden" id="loading-state">
+<div class="w-64 h-px bg-primary-gold animate-expandLine"></div>
+</div>
+<!-- Error State Banner (Hidden by default) -->
+<div class="hidden w-full h-1 border-t border-[#EF4444] bg-background-dark text-center py-2" id="error-state">
+<span class="text-[#EF4444] text-sm font-medium tracking-wide">Connection to ledger degraded</span>
+</div>
+<!-- Shared TopNav Inclusion -->
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-dark group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col w-full max-w-[1200px] flex-1">
+<!-- Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-surface-dark px-0 py-6 mb-12 lg:mb-24 h-[120px]">
+<div class="flex items-center gap-4 text-text-light hover:opacity-80 transition-opacity cursor-pointer">
+<div class="size-6 text-primary-gold">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
+<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-text-light text-xl font-bold leading-tight tracking-wide uppercase">Obsidian <span class="font-normal text-muted-slate ml-1">Executive</span></h2>
+</div>
+<div class="flex flex-1 justify-end gap-8 hidden md:flex">
+<nav class="flex items-center gap-9">
+<a class="text-primary-gold text-sm font-medium leading-normal hover:text-white transition-colors uppercase tracking-widest relative after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:w-full after:h-px after:bg-primary-gold" href="#">Dashboard</a>
+<a class="text-muted-slate hover:text-text-light transition-colors text-sm font-medium leading-normal uppercase tracking-widest" href="#">The Recovery Loop</a>
+<a class="text-muted-slate hover:text-text-light transition-colors text-sm font-medium leading-normal uppercase tracking-widest" href="#">Recovery Gallery</a>
+<a class="text-muted-slate hover:text-text-light transition-colors text-sm font-medium leading-normal uppercase tracking-widest" href="#">The Bar</a>
+</nav>
+</div>
+<!-- Mobile Menu Icon (Placeholder) -->
+<button class="md:hidden text-text-light hover:text-primary-gold transition-colors">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+</header>
+<!-- Hero Section -->
+<main class="flex-1 flex flex-col justify-center items-center text-center px-4 z-10 animate-fadeInUp">
+<!-- Atmospheric Background -->
+<div class="absolute inset-0 z-[-1] pointer-events-none opacity-20" style="background: radial-gradient(circle at 50% 40%, rgba(212, 175, 55, 0.15) 0%, transparent 60%);"></div>
+<h1 class="font-display text-4xl md:text-6xl lg:text-[64px] font-bold text-text-light leading-tight tracking-[-0.02em] mb-8 max-w-4xl">
+              Silent Leaks. <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-gold to-[#fff5cc]">Surgical Recovery.</span>
+</h1>
+<p class="text-muted-slate text-lg md:text-xl max-w-2xl mb-12 font-body font-light">
+              AI-driven revenue recovery platform identifying and capturing lost capital with surgical precision. Zero-tolerance compliance.
+            </p>
+<button class="group relative flex min-w-[200px] cursor-pointer items-center justify-center overflow-hidden h-[48px] px-8 border border-primary-gold bg-transparent text-primary-gold text-[12px] font-medium uppercase tracking-[0.15em] transition-all duration-300 hover:bg-primary-gold hover:text-background-dark hover:shadow-[0_0_20px_rgba(212,175,55,0.3)]">
+<span class="relative z-10 flex items-center gap-2">
+                Initialize Audit
+                <span class="material-symbols-outlined text-[16px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</span>
+</button>
+</main>
+<!-- Bottom Anchored Metric Cards -->
+<div class="mt-auto pt-16 pb-24 w-full relative z-10 opacity-0 animate-[fadeInUp_0.8s_ease-out_0.3s_forwards]">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+<!-- Card 1 -->
+<div class="bg-surface-dark border border-[#2D3748] p-8 rounded-sm hover:border-primary-gold/50 transition-colors group cursor-default relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary-gold">account_balance</span>
+</div>
+<p class="text-muted-slate text-sm font-medium uppercase tracking-widest mb-4">Recovered Today</p>
+<div class="flex items-baseline gap-4">
+<p class="text-text-light font-display text-4xl lg:text-5xl font-bold">$142,500</p>
+</div>
+<div class="flex items-center gap-2 mt-4 text-accent-emerald text-sm font-medium bg-accent-emerald/10 w-fit px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+                  +12.4% vs 30d avg
+                </div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-dark border border-[#2D3748] p-8 rounded-sm hover:border-primary-gold/50 transition-colors group cursor-default relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary-gold">analytics</span>
+</div>
+<p class="text-muted-slate text-sm font-medium uppercase tracking-widest mb-4">Active Interventions</p>
+<div class="flex items-baseline gap-4">
+<p class="text-text-light font-display text-4xl lg:text-5xl font-bold">42</p>
+</div>
+<div class="flex items-center gap-2 mt-4 text-accent-emerald text-sm font-medium bg-accent-emerald/10 w-fit px-2 py-1 rounded">
+<span class="material-symbols-outlined text-[14px]">arrow_upward</span>
+                  +5 active streams
+                </div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-dark border border-[#2D3748] p-8 rounded-sm hover:border-primary-gold/50 transition-colors group cursor-default relative overflow-hidden md:col-span-2 lg:col-span-1">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-6xl text-primary-gold">verified_user</span>
+</div>
+<p class="text-muted-slate text-sm font-medium uppercase tracking-widest mb-4">Execution Success Rate</p>
+<div class="flex items-baseline gap-4">
+<p class="text-text-light font-display text-4xl lg:text-5xl font-bold">99.9%</p>
+</div>
+<div class="flex items-center gap-2 mt-4 text-muted-slate text-sm font-medium">
+<span class="w-2 h-2 rounded-full bg-accent-emerald animate-pulse"></span>
+                  System Nominal
+                </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Ledger Ticker (Bottom Fixed) -->
+<div class="fixed bottom-0 left-0 w-full bg-surface-dark border-t border-[#2D3748] h-10 flex items-center overflow-hidden z-40">
+<div class="flex whitespace-nowrap animate-marquee">
+<!-- Ticker Content duplicated for seamless loop -->
+<div class="flex items-center gap-8 px-4 text-[13px] font-body text-muted-slate">
+<span class="text-accent-emerald font-medium">+ $4,250</span> <span>Stripe Routing Failure Salvage</span> <span class="opacity-50">14:02 EST</span> <span class="text-primary-gold/30">•</span>
+<span class="text-accent-emerald font-medium">+ $1,800</span> <span>Cart Abandonment Recovery - Enterprise</span> <span class="opacity-50">14:00 EST</span> <span class="text-primary-gold/30">•</span>
+<span class="text-accent-emerald font-medium">+ $12,450</span> <span>Fraud False-Positive Override</span> <span class="opacity-50">13:45 EST</span> <span class="text-primary-gold/30">•</span>
+<span class="text-accent-emerald font-medium">+ $850</span> <span>B2B Invoice Reconciliation</span> <span class="opacity-50">13:30 EST</span> <span class="text-primary-gold/30">•</span>
+<span class="text-accent-emerald font-medium">+ $4,250</span> <span>Stripe Routing Failure Salvage</span> <span class="opacity-50">14:02 EST</span> <span class="text-primary-gold/30">•</span>
+<span class="text-accent-emerald font-medium">+ $1,800</span> <span>Cart Abandonment Recovery - Enterprise</span> <span class="opacity-50">14:00 EST</span> <span class="text-primary-gold/30">•</span>
+<span class="text-accent-emerald font-medium">+ $12,450</span> <span>Fraud False-Positive Override</span> <span class="opacity-50">13:45 EST</span> <span class="text-primary-gold/30">•</span>
+<span class="text-accent-emerald font-medium">+ $850</span> <span>B2B Invoice Reconciliation</span> <span class="opacity-50">13:30 EST</span> <span class="text-primary-gold/30">•</span>
+</div>
+</div>
+<!-- Gradient masks for fade effect on edges -->
+<div class="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-surface-dark to-transparent z-10 pointer-events-none"></div>
+<div class="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-surface-dark to-transparent z-10 pointer-events-none"></div>
+</div>
+</div>
+<script>
+    // Simple script to demonstrate error/loading states if needed
+    // setTimeout(() => { document.getElementById('error-state').classList.remove('hidden'); }, 5000);
+  </script>
+</body></html>
